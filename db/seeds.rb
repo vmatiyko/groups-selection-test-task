@@ -1,7 +1,15 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
-#
-# Examples:
-#
-#   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
-#   Mayor.create(name: 'Emanuel', city: cities.first)
+require 'csv'
+
+Group.delete_all
+
+csv_text = File.read('public/groups/data.csv')
+csv = CSV.parse(csv_text, headers: true)
+csv.each do |row|
+  attrs      = row.to_hash
+  id         = attrs['id'].to_i
+  name       = attrs['name']
+  balance    = attrs['balance'].to_f
+  is_private = attrs['private'] == 'Y' ? true : false
+  
+  Group.create(id: id, name: name, balance: balance, is_private: is_private)
+end
