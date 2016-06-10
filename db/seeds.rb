@@ -10,6 +10,10 @@ csv.each do |row|
   name       = attrs['name']
   balance    = attrs['balance'].to_f
   is_private = attrs['private'] == 'Y' ? true : false
-  
+
   Group.create(id: id, name: name, balance: balance, is_private: is_private)
+end
+
+ActiveRecord::Base.connection.tables.each do |t|
+  ActiveRecord::Base.connection.reset_pk_sequence!(t)
 end

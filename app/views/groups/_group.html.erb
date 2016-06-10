@@ -1,0 +1,18 @@
+<tr data-toggle="collapse" data-target="#accordion_<%= group.id %>" class="clickable">
+  <td><%= group.name %></td>
+  <td><%= group.balance %></td>
+  <td><%= group.is_private %></td>
+  <td><%= link_to 'Show', group %></td>
+  <td><%= link_to 'Edit', edit_group_path(group) %></td>
+  <td><%= link_to 'Destroy', group, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+</tr>
+
+<tr>
+  <td colspan="6">
+    <div id="accordion_<%= group.id %>" class="collapse">
+      <textarea style='width:100%;' class='text-center'>
+        <%= render 'html_snippet', group: group %>
+      </textarea>
+    </div>
+  </td>
+</tr>
