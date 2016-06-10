@@ -1,0 +1,18 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: 5
+
+development:
+  <<: *default
+  database: groups-selection-test-task_development
+
+test:
+  <<: *default
+  database: groups-selection-test-task_test
+
+production:
+  <<: *default
+  database: groups-selection-test-task_production
+  username: groups-selection-test-task
+  password: <%= ENV['GROUPS-SELECTION-TEST-TASK_DATABASE_PASSWORD'] %>
